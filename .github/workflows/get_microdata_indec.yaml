@@ -26,5 +26,8 @@ jobs:
       #     git push 
       - name: Commit results
         run: |
-          git commit data.csv --allow-empty -m 'gHA build: ${{github.run_number}}' || echo "No changes to commit"
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add --all
+          git commit -am "actualizo base en repo"
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
